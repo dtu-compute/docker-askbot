@@ -1,0 +1,128 @@
+
+# python manage.py runserver `hostname -i`:8000
+# uwsgi --master --http-socket 0.0.0.0:8000 --plugins python --wsgi-file=/app/django.wsgi
+
+http://uwsgi-docs.readthedocs.io/en/latest/tutorials/Django_and_nginx.html
+#COPY askbot_nginx.conf /etc/nginx/conf.d/
+
+
+
+Please deploy from branch 0.7.x (there is a fresh commit 
+with the CAS user filtering enabled) then:
+
+1) install pyyaml library (put in the same virtualenv where the site is deployed if using virtualenv)
+pip install pyyaml
+
+2) to the same directory where you have settings.py add file
+
+mycas.py with the following contents:
+
+import yaml
+
+def is_user_admitted(username):
+    users_file = open('users.yaml', 'r')
+    users = yaml.load(users_file)
+    return username in users
+
+3) to settings.py add lines (adjust the message below as well):
+
+ASKBOT_CAS_USER_FILTER = 'mycas.is_user_admitted'
+ASKBOT_CAS_USER_FILTER_DENIED_MSG = 'Sorry, access allowed only to Students of group XYZ'
+
+Forgot to add there should be file in the same directory users.yaml
+with the format as you said.
+
+abcd: Test user
+efadeev: Evgeny Fadeev
+mttj: Martin Jeppesen
+xxx: Another test user with æøåÆØÅ
+
+
+
+Finished all of the above. Please note that currently
+all emails are set as <login>@student.dtu.dk
+So your email would be set incorrectly.
+
+This could be fixed by elaborating the yaml file and modifying the
+mycas.py file accordingly.
+
+
+
+
+To test, pull from the 0.7.x branch, add to settings.py:
+ASKBOT_CAS_USER_FILTER = 'mycas.is_user_admitted'
+ASKBOT_CAS_GET_USERNAME = 'mycas.get_username'
+ASKBOT_CAS_GET_EMAIL = 'mycas.get_email'
+ASKBOT_CAS_USER_FILTER_DENIED_MSG = 'Sorry, access denied'
+ASKBOT_CAS_ONE_CLICK_REGISTRATION_ENABLED = True
+
+Cas server name can be set via settings-> login providers or in settings.py
+ASKBOT_CAS_SERVER_NAME = 'dtu.dk website'
+
+Update contents of mycas.py:
+
+import yaml
+
+def get_data():
+    users_file = open('users.yaml', 'r')
+    return yaml.load(users_file)
+
+def is_user_admitted(login_name):
+    return login_name in get_data()
+
+def get_username(login_name):
+    return get_data().get(login_name)
+
+def get_email(login_name):
+    return '{}@student.dtu.dk'.format(login_name)
+
+
+> I still get the normal login, and not the 1-click cas login. I don't even see cas login button amount your login options.
+
+
+Oh, then create an account - it should be admin.
+Go to "settings" -> login providers 
+
+Enable cas and enter parameters for your site.
+Then it should work.
+
+When all other login providers are disabled, cas login link
+will be in the header.
+
+
+
+The CAS server url must have a slash at the end.
+I will fix this data entry issue in the next iteration.
+Now please just set it to (note slash after the dtu):
+https://auth.dtu.dk/dtu/
+
+
+If this is added to the settings.py file,
+then there is no need to modify login provider settings via the web interface:
+
+ASKBOT_SIGNIN_CAS_ENABLED = True
+ASKBOT_CAS_SERVER_NAME = 'the DTU Website'
+ASKBOT_CAS_SERVER_URL = 'https://auth.dtu.dk/dtu/'
+ASKBOT_SIGNIN_YAHOO_ENABLED = False
+ASKBOT_SIGNIN_AOL_ENABLED = False
+ASKBOT_SIGNIN_OPENID_ENABLED = False
+ASKBOT_SIGNIN_FLICKR_ENABLED = False
+ASKBOT_SIGNIN_TECHNORATI_ENABLED = False
+ASKBOT_SIGNIN_WORDPRESS_ENABLED = False
+ASKBOT_SIGNIN_BLOGGER_ENABLED = False
+ASKBOT_SIGNIN_LIVEJOURNAL_ENABLED = False
+ASKBOT_SIGNIN_CLAIMID_ENABLED = False
+ASKBOT_SIGNIN_VIDOOP_ENABLED = False
+ASKBOT_SIGNIN_VERISIGN_ENABLED = False
+ASKBOT_SIGNIN_LOCAL_ENABLED = False
+
+
+
+The setting names can be found by looking into
+files askbot/conf/*.py
+
+To place them into settings.py a prefix ASKBOT_ must be added.
+
+E.g. for setting APP_URL it will be
+ASKBOT_APP_URL = 'http://example.com/'
+

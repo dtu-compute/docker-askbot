@@ -1,0 +1,7 @@
+askbot:
+  build: /docker/askbot
+  ports:
+    - "80:8000"
+#  volumes:
+#    - "/vol/askbot:/data"
+
