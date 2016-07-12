@@ -7,6 +7,11 @@ cd /askbot-devel
 
 python setup.py develop
 
+# workaround as celery 4.0.0rc3 is buggy and askbot can't build with it
+pip uninstall --yes celery && pip install celery==3.1.18
+pip freeze > /app/installed_python_packages
+
+
 if [ ! -f /data/askbot.db ]; then
   askbot-setup --dir-name=/app --db-engine=2 --db-name=/data/askbot.db
 
@@ -16,6 +21,7 @@ if [ ! -f /data/askbot.db ]; then
   python manage.py collectstatic --noinput --ignore /data/
   python manage.py syncdb --noinput
 fi
+
 
 cd /app
 python manage.py migrate --noinput

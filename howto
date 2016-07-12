@@ -121,6 +121,8 @@ ASKBOT_SIGNIN_LOCAL_ENABLED = False
 The setting names can be found by looking into
 files askbot/conf/*.py
 
+grep -oP '\b[A-Z0-9_]*[A-Z]+[A-Z0-9_]*\b' askbot/conf/*.py
+
 To place them into settings.py a prefix ASKBOT_ must be added.
 
 E.g. for setting APP_URL it will be
