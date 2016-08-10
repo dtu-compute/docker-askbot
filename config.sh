@@ -14,7 +14,7 @@ DEBUG = False
 ASKBOT_APP_URL = "http://enote.compute.dtu.dk/"
 
 ASKBOT_CAS_USER_FILTER = 'mycas.is_user_admitted'
-ASKBOT_CAS_USER_FILTER_DENIED_MSG = 'Sorry, access allowed only to Students of group XYZ'
+ASKBOT_CAS_USER_FILTER_DENIED_MSG = 'Access only allowed for students taking the course'
 
 ASKBOT_CAS_GET_USERNAME = 'mycas.get_username'
 ASKBOT_CAS_GET_EMAIL = 'mycas.get_email'
