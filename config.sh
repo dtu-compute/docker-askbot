@@ -5,13 +5,14 @@
 # To place them into settings.py a prefix ASKBOT_ must be added.
 # E.g. for setting APP_URL it will be
 # ASKBOT_APP_URL = 'http://example.com/'
-
 cat << EOF >> /app/settings.py
 
 
 DEBUG = False
 
-ASKBOT_APP_URL = "http://enote.compute.dtu.dk/"
+#ASKBOT_APP_URL = "http://enote.compute.dtu.dk/"
+# this causes migrate to fail for unknown reasons
+# ASKBOT_URL = "/askbot"
 
 ASKBOT_CAS_USER_FILTER = 'mycas.is_user_admitted'
 ASKBOT_CAS_USER_FILTER_DENIED_MSG = 'Access only allowed for students taking the course'

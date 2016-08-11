@@ -15,14 +15,19 @@ pip freeze > /app/installed_python_packages
 if [ ! -f /data/askbot.db ]; then
   askbot-setup --dir-name=/app --db-engine=2 --db-name=/data/askbot.db
 
+  echo "config"
   /app/config.sh
 
   cd /app
+  echo "collect static"
   python manage.py collectstatic --noinput --ignore /data/
+  echo "syncdb"
   python manage.py syncdb --noinput
 fi
 
 
 cd /app
+echo "migrate"
 python manage.py migrate --noinput
 
+cat  /data/log/askbot.log
