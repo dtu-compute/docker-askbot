@@ -2,7 +2,7 @@ import yaml
 import os
 
 def get_data():
-    users_file = open('/data/config/{}_users.yaml'.format(os.environ['COURSE_NAME'], 'r')
+    users_file = open('/data/config/{}_users.yaml'.format(os.environ['COURSE_ENV'], 'r')
     return yaml.load(users_file)
 
 def is_user_admitted(login_name):
