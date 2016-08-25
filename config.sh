@@ -51,3 +51,6 @@ ASKBOT_ALLOWED_UPLOAD_FILE_TYPES = ('.jpg', '.jpeg', '.png')
 
 EOF
 
+r=$(od -vAn -N16 -tx < /dev/urandom | tr -d " ")
+sed -i "s/eb0aa30e79f2800cebc58b73ae06f08c/$r/" /app/settings.py
+
