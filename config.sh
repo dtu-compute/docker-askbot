@@ -12,7 +12,7 @@ DEBUG = False
 
 #ASKBOT_APP_URL = "http://enote.compute.dtu.dk/"
 # this causes migrate to fail for unknown reasons
-# ASKBOT_URL = "/askbot"
+ASKBOT_URL = 'askbot/'
 
 ASKBOT_CAS_USER_FILTER = 'mycas.is_user_admitted'
 ASKBOT_CAS_USER_FILTER_DENIED_MSG = 'Access only allowed for students taking the course'
@@ -39,8 +39,6 @@ ASKBOT_SIGNIN_VIDOOP_ENABLED = False
 ASKBOT_SIGNIN_VERISIGN_ENABLED = False
 ASKBOT_SIGNIN_LOCAL_ENABLED = False
 
-SECRET_KEY = 'eb0aa30e79f2800cebc58b73ae06f08c'
-
 ADMINS = (
     ('DTU Admin', 'test@dtu.dk'),
 )
@@ -52,5 +50,6 @@ ASKBOT_ALLOWED_UPLOAD_FILE_TYPES = ('.jpg', '.jpeg', '.png')
 EOF
 
 r=$(od -vAn -N16 -tx < /dev/urandom | tr -d " ")
-sed -i "s/eb0aa30e79f2800cebc58b73ae06f08c/$r/" /app/settings.py
+
+echo SECRET_KEY = \'$r\' >> /app/settings.py
 
