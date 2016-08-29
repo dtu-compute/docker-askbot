@@ -10,12 +10,9 @@ RUN dnf -y install python2 python2-devel gcc uwsgi python-wsgiref uwsgi-plugin-p
 RUN git clone -b 0.7.x https://github.com/ASKBOT/askbot-devel.git && \
     rm -rf /askbot-devel/.git
 
-COPY mycas.py uwsgi.ini config.sh setup.sh /app/
-
-# This won't work when the /data folder is a docker volume, since volumes don't exist during build.
-RUN /app/setup.sh
+COPY mycas.py uwsgi.ini config.sh cmd.sh /app/
 
 #USER uwsgi
 
-CMD ["/usr/sbin/uwsgi", "/app/uwsgi.ini"]
+CMD ["/app/cmd.sh"]
 

@@ -31,3 +31,6 @@ echo "migrate"
 python manage.py migrate --noinput
 
 cat  /data/log/askbot.log
+
+/usr/sbin/uwsgi /app/uwsgi.ini
+
