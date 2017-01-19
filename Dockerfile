@@ -10,9 +10,10 @@ RUN dnf -y install python2 python2-devel gcc uwsgi python-wsgiref uwsgi-plugin-p
 RUN git clone -b 0.7.x https://github.com/ASKBOT/askbot-devel.git && \
     rm -rf /askbot-devel/.git
 
-COPY mycas.py uwsgi.ini config.sh cmd.sh /app/
+COPY askbot.env run.sh mycas.py uwsgi.ini config.sh cmd.sh /app/
 
 #USER uwsgi
 
-CMD ["/app/cmd.sh"]
+RUN "/app/cmd.sh"
 
+CMD [ "/app/run.sh" ]
