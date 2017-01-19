@@ -5,6 +5,8 @@ touch /data/log/askbot.log
 
 cd /askbot-devel
 
+pip install python-daemon
+
 python setup.py develop
 
 # workaround as celery 4.0.0rc3 is buggy and askbot can't build with it
