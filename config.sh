@@ -11,6 +11,7 @@ tail /app/settings.py
 cat << EOF >> /app/settings.py
 
 #DEBUG = True
+DEBUG = False
 
 #ASKBOT_APP_URL = ''
 ASKBOT_URL = 'askbot/'
