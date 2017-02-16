@@ -18,6 +18,7 @@ ASKBOT_URL = 'askbot/'
 
 ASKBOT_CAS_USER_FILTER = 'mycas.is_user_admitted'
 ASKBOT_CAS_USER_FILTER_DENIED_MSG = 'Access only allowed for students taking the course'
+CAS_USER_FILTER_DENIED_MSG = 'Access only allowed for students taking the course'
 
 ASKBOT_CAS_GET_USERNAME = 'mycas.get_username'
 ASKBOT_CAS_GET_EMAIL = 'mycas.get_email'

@@ -13,8 +13,10 @@ if [ ! -f /data/askbot.db ]; then
   cp /data-default/askbot.db /data/askbot.db 
 fi
 
-cat /app/settings.py | sed 's,^ASKBOT_APP_URL = \(.*\)$,ASKBOT_APP_URL = \"https:\/\/'"$ASKBOT_URL"'\/askbot\",g' > /app/settings_configged.py
+cat /app/settings.py | sed 's,^ASKBOT_APP_URL = \(.*\)$,ASKBOT_APP_URL = \"https:\/\/'"$ASKBOT_URL"'\",g' > /app/settings_configged.py
 mv /app/settings_configged.py /app/settings.py
+
+grep ASKBOT_APP_URL /app/settings.py
 
 echo "migrate"
 python manage.py migrate --noinput
