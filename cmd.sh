@@ -6,6 +6,8 @@ touch /data/log/askbot.log
 cd /askbot-devel
 
 pip install python-daemon
+pip install django-appconf
+rc=$?; if [[ $rc != 0 ]]; then exit $rc; fi
 
 python setup.py develop
 rc=$?; if [[ $rc != 0 ]]; then exit $rc; fi

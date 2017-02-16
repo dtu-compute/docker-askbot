@@ -7,6 +7,7 @@ RUN dnf -y install python2 python2-devel gcc uwsgi python-wsgiref uwsgi-plugin-p
 
 # The develop option will not install askbot into the python site packages directory
 #RUN git clone -b 0.7.x https://github.com/dtu-compute/askbot-devel && \
+RUN echo foo>cachebust
 RUN git clone -b 0.7.x https://github.com/ASKBOT/askbot-devel.git && \
     rm -rf /askbot-devel/.git
 
