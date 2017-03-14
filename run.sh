@@ -2,8 +2,8 @@
 
 cd /app
 
-if [ ! -r "/data/config/${COURSE_ENV}-users.yaml" ]; then
-  echo "course file /data/config/${COURSE_ENV}-users.yaml not readable"
+if [ ! -r "/users.yaml" ]; then
+  echo "course file /users.yaml not readable"
   exit 1
 fi
 
@@ -17,7 +17,7 @@ fi
 
 # remove comments in yaml, which the Python parser will interpret as separate streams.
 # since we really only have one stream, fix it here rather than doing load all
-grep -vE "^---" /data/config/${COURSE_ENV}-users.yaml > /app/cas-users.yaml
+grep -vE "^---" /users.yaml > /app/cas-users.yaml
 
 if [ ! -f "/data/askbot.db" ]; then
   echo "No DB! Copying clean one..."
