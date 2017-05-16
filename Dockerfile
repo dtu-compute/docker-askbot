@@ -23,7 +23,7 @@ RUN dnf -y install sudo
 RUN git clone -b 0.7.x https://github.com/ASKBOT/askbot-devel.git && \
     rm -rf /askbot-devel/.git
 
-COPY askbot.env run.sh mycas.py uwsgi.ini config.sh cmd.sh /app/
+COPY run.sh mycas.py uwsgi.ini config.sh cmd.sh /app/
 
 RUN "/app/cmd.sh"
 
