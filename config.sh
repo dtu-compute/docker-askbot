@@ -15,6 +15,7 @@ ASKBOT_URL = 'askbot/'
 
 ASKBOT_CAS_USER_FILTER = 'mycas.is_user_admitted'
 ASKBOT_CAS_USER_FILTER_DENIED_MSG = 'Access only allowed for students taking the course'
+CAS_USER_FILTER_DENIED_MSG = 'Access only allowed for students taking the course'
 
 ASKBOT_CAS_GET_USERNAME = 'mycas.get_username'
 ASKBOT_CAS_GET_EMAIL = 'mycas.get_email'
@@ -38,8 +39,14 @@ ASKBOT_SIGNIN_VIDOOP_ENABLED = False
 ASKBOT_SIGNIN_VERISIGN_ENABLED = False
 ASKBOT_SIGNIN_LOCAL_ENABLED = False
 
+ENABLE_MATHJAX = True
+ASKBOT_ENABLE_MATHJAX = True
+MATHJAX_BASE_URL = '/MathJax'
+ASKBOT_MATHJAX_BASE_URL = '/MathJax'
+
 ADMINS = (
     ('DTU Admin', 'test@dtu.dk'),
+    ('DTU Test Admin', 'enotema@dtu.dk'),
 )
 
 TIME_ZONE = 'Europe/Copenhagen'
