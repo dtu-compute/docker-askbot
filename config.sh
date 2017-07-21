@@ -1,7 +1,5 @@
 #!/usr/bin/bash
 
-source /app/askbot.env
-
 # The setting names can be found by looking into files askbot/conf/*.py
 # To place them into settings.py a prefix ASKBOT_ must be added.
 # E.g. for setting APP_URL it will be
@@ -39,7 +37,7 @@ ASKBOT_SIGNIN_VIDOOP_ENABLED = False
 ASKBOT_SIGNIN_VERISIGN_ENABLED = False
 ASKBOT_SIGNIN_LOCAL_ENABLED = False
 
-ASKBOT_FOOTER_MODE = disable
+ASKBOT_FOOTER_MODE = 'disable'
 ASKBOT_RSS_ENABLED = False
 ASKBOT_ENABLE_SHARING_TWITTER = False
 ASKBOT_ENABLE_SHARING_FACEBOOK = False
