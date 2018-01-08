@@ -14,11 +14,6 @@ if [ ! -w "/data/log/askbot.log" ]; then
   exit 1
 fi
 
-
-# remove comments in yaml, which the Python parser will interpret as separate streams.
-# since we really only have one stream, fix it here rather than doing load all
-grep -vE "^---" /users.yaml > /app/cas-users.yaml
-
 if [ ! -f "/data/askbot.db" ]; then
   echo "No DB! Copying clean one..."
   cp /data-default/askbot.db /data/askbot.db 
