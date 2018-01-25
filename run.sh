@@ -30,6 +30,7 @@ cat /app/settings.py | sed 's,^ASKBOT_APP_URL = \(.*\)$,ASKBOT_APP_URL = \"https
 mv /app/settings_configged.py /app/settings.py
 
 echo "migrate"
+cat askbot_requirements.txt
 python manage.py migrate --noinput
 
 cat  /data/log/askbot.log

@@ -5,6 +5,8 @@ touch /data/log/askbot.log
 
 cd /askbot-devel
 
+cat askbot_requirements.txt
+
 pip install python-daemon
 pip install django-appconf
 rc=$?; if [[ $rc != 0 ]]; then exit $rc; fi
@@ -14,6 +16,7 @@ rc=$?; if [[ $rc != 0 ]]; then exit $rc; fi
 
 # workaround as celery 4.0.0rc3 is buggy and askbot can't build with it
 pip uninstall --yes celery && pip install celery==3.1.18
+pip uninstall --yes six && pip install six==1.10.0
 pip freeze > /app/installed_python_packages
 
 askbot-setup --dir-name=/app --db-engine=2 --db-name=/data/askbot.db
